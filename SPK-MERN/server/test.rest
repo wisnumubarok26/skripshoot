@@ -1,0 +1,9 @@
+GET http://localhost:5000/relawan
+# Content-Type: application/json
+
+# {
+#   "nama_relawan": "mubarok",
+#   "email_relawan": "haha@example.com",
+#   "no_relawan":"0897222",
+#   "gender_relawan":"Laki-Laki"
+# }
