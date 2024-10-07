@@ -1,9 +1,8 @@
-GET http://localhost:5000/relawan
+GET http://localhost:5000/kriteria
 # Content-Type: application/json
 
 # {
-#   "nama_relawan": "mubarok",
-#   "email_relawan": "haha@example.com",
-#   "no_relawan":"0897222",
-#   "gender_relawan":"Laki-Laki"
+#   "nama_kriteria":"Inisiatif",
+#   "bobot": 3,
+#   "tipe":"Benefit"
 # }

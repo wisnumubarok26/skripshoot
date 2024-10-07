@@ -19,7 +19,7 @@ const Navbar = ({setIsLoggedIn}) => {
             <nav className="flex-grow">
                 <ul className="space-y-2 p-4">
                     <li>
-                        <Link to="/data-relawan" className="hover:bg-green-500 p-2 rounded block">Data Relawan</Link>
+                        <Link to="/home" className="hover:bg-green-500 p-2 rounded block">Data Relawan</Link>
                     </li>
                     <li>
                         <Link to="/kriteria" className="hover:bg-green-500 p-2 rounded block">Kriteria</Link>

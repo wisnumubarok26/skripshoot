@@ -1,33 +1,22 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { useState } from 'react';
-import LoginPage from './components/pages/Login'; // Ganti dengan path yang sesuai // Ganti dengan path yang sesuai
-import Home from './components/pages/Home';
-import { Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "./components/pages/Login";
+import Home from "./components/pages/Home";
+import AddRelawan from "./components/fragment/Relawan/AddRelawan";
+import EditRelawan from "./components/fragment/Relawan/EditRelawan";
 
-const ProtectedRoute = ({ isLoggedIn, children }) => {
-    return isLoggedIn ? children : <Navigate to="/" />;
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="home" element={<Home />} />
+          <Route path="/home/add" element={<AddRelawan/>} />
+          <Route path="/home/edit/:id" element={<EditRelawan/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
-
-
-const App = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <LoginPage setIsLoggedIn={setIsLoggedIn} />
-        },
-        {
-            path: "/home",
-            element: (
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Home />
-                </ProtectedRoute>
-            )
-        }
-    ]);
-
-    return <RouterProvider router={router} />;
-};
 
 export default App;

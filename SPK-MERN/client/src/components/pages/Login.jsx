@@ -2,7 +2,7 @@ import FormLogin from "../fragment/FormLogin";
 import AuthLayout from "../layout/AuthLayout";
 import Logo from "../element/Logo/Logo";
 
-const LoginPage = ({ setIsLoggedIn }) => {
+const LoginPage = () => {
     return (
         <div className="flex min-h-screen bg-bg ">
             {/* Sisi Kiri */}
@@ -14,7 +14,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
             {/* Sisi Kanan */}
             <div className="flex-1 flex justify-center items-center">
                 <AuthLayout judulPage="Login" type='login'>
-                    <FormLogin setIsLoggedIn={setIsLoggedIn}  />
+                    <FormLogin />
                 </AuthLayout>
             </div>
         </div>
