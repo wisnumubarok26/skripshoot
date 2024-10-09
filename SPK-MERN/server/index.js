@@ -3,6 +3,7 @@ import mysql from "mysql";
 import cors from "cors";
 import RelawanRoute from "./routes/RelawanRoute.js";
 import KriteriaRoute from "./routes/KriteriaRoute.js"
+import PenilaianRoute from "./routes/PenilaianRoute.js"
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -33,5 +34,6 @@ app.use(cors())
 app.use(express.json())
 app.use(RelawanRoute);
 app.use(KriteriaRoute)
+app.use(PenilaianRoute)
 
 app.listen(process.env.PORT, ()=>{console.log("Server sedang berjalan....")})
