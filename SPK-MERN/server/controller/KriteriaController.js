@@ -13,7 +13,7 @@ export const getKriteria = async (req, res) => {
 
 export const getKriteriaById = async (req, res) => {
     try {
-        const kriteria = await Kriteria.findByPk(req.params.id);
+        const kriteria = await Kriteria.findByPk(req.params.id_kriteria);
         if (!kriteria) {
             return res.status(404).json({ message: "Kriteria not found" }); // Respons lebih jelas
         }
@@ -40,7 +40,7 @@ export const saveKriteria = async (req, res) => {
 };
 
 export const updateKriteria = async (req, res) => {
-    const kriteriaId = req.params.id;
+    const kriteriaId = req.params.id_kriteria;
     const { nama_kriteria, bobot, tipe } = req.body;
 
     try {
@@ -63,7 +63,7 @@ export const updateKriteria = async (req, res) => {
 };
 
 export const deleteKriteria = async (req, res) => {
-    const kriteriaId = req.params.id;
+    const kriteriaId = req.params.id_kriteria;
     try {
         const deleted = await Kriteria.destroy({
             where: { id_kriteria: kriteriaId } // Gunakan id_kriteria untuk mencocokkan

@@ -20,7 +20,8 @@ const Penilaian = sequelize.define('penilaian', {
         references: {
             model: 'relawans', // name of the target table
             key: 'id'        // key in the target table
-        }
+        },
+        onDelete: 'CASCADE'
     },
     id_kriteria: {
         type: DataTypes.INTEGER,
@@ -28,8 +29,11 @@ const Penilaian = sequelize.define('penilaian', {
         references: {
             model: 'kriteria', // name of the target table
             key: 'id_kriteria' // key in the target table
-        }
+        },
+        onDelete: 'CASCADE'
     }
+}, {
+    timestamps: false // Nonaktifkan timestamps jika tidak diperlukan
 });
 
 // Sync models with the database
@@ -37,7 +41,9 @@ const syncModels = async () => {
   try {
     await sequelize.authenticate();
     console.log('Database connection has been established successfully.');
-    await sequelize.sync();
+    // Gunakan opsi alter untuk memperbarui tabel yang sudah ada
+    await sequelize.sync({ alter: true }); // Menggunakan alter agar tidak membuat tabel baru
+    await sequelize.sync({ force: false });
     console.log('Penilaian model synced with database');
   } catch (err) {
     console.error('Unable to connect to the database or sync model:', err);

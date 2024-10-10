@@ -34,7 +34,7 @@ const syncModels = async () => {
   try {
     await sequelize.authenticate();
     console.log('Database connection has been established successfully.');
-    await sequelize.sync();
+    await sequelize.sync({ force: false });
     console.log('Kriteria model synced with database');
   } catch (err) {
     console.error('Unable to connect to the database or sync model:', err);

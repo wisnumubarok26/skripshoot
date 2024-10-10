@@ -25,7 +25,7 @@ const Navbar = ({setIsLoggedIn}) => {
                         <Link to="/kriteria" className="hover:bg-green-500 p-2 rounded block">Kriteria</Link>
                     </li>
                     <li>
-                        <Link to="/pembobotan" className="hover:bg-green-500 p-2 rounded block">Pembobotan</Link>
+                        <Link to="/penilaian" className="hover:bg-green-500 p-2 rounded block">Penilaian</Link>
                     </li>
                     <li>
                         <Link to="/perhitungan" className="hover:bg-green-500 p-2 rounded block">Perhitungan</Link>

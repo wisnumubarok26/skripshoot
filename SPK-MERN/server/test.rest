@@ -1,11 +1,11 @@
-POST http://localhost:5000/penilaian
-Content-Type: application/json
+DELETE http://localhost:5000/kriteria/6
+# Content-Type: application/json
 
-{
-    "id":22,
-    "id_kriteria":6,
-    "nilai":4
-}
+# {
+#     "id":22,
+#     "id_kriteria":6,
+#     "nilai":4
+# }
 
 # {
 #     "nama_relawan":"wisnu",

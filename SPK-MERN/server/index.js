@@ -36,4 +36,5 @@ app.use(RelawanRoute);
 app.use(KriteriaRoute)
 app.use(PenilaianRoute)
 
+
 app.listen(process.env.PORT, ()=>{console.log("Server sedang berjalan....")})

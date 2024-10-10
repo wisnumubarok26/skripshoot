@@ -16,15 +16,17 @@ const KriteriaList = () => {
     setKriteria(response.data);
   };
 
-  const deleteKriteria = async (id_kriteria) => {
+ const deleteKriteria = async (id_kriteria) => {
     console.log(`Attempting to delete kriteria with ID: ${id_kriteria}`);
     try {
-      await axios.delete(`http://localhost:5000/kriteria/${id_kriteria}`);
-      getKriteria();
+        const response = await axios.delete(`http://localhost:5000/kriteria/${id_kriteria}`);
+        console.log(response.data); // Menampilkan respons dari server
+        getKriteria(); // Mengambil ulang data setelah penghapusan
     } catch (error) {
-      console.log(error);
+        console.log('Error:', error.response ? error.response.data : error.message);
     }
-  };
+};
+
 
   // Menentukan index data yang akan ditampilkan berdasarkan halaman saat ini
   const indexOfLastKriteria = currentPage * kriteriaPerPage;
