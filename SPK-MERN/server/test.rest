@@ -1,16 +1,9 @@
-DELETE http://localhost:5000/kriteria/6
-# Content-Type: application/json
+GET http://localhost:5000/penilaian/relawan/13
+Content-Type: application/json
 
-# {
-#     "id":22,
-#     "id_kriteria":6,
-#     "nilai":4
-# }
-
-# {
-#     "nama_relawan":"wisnu",
-#     "email_relawan":"w@gmail.com",
-#     "no_relawan":"0000",
-#     "gender_relawan":"Laki-laki"
-# }
+{
+    "id":22,
+    "id_kriteria":6,
+    "nilai":4
+}
  

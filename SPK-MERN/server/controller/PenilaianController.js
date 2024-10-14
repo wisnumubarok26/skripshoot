@@ -2,6 +2,36 @@ import Penilaian from '../models/PenilaianModel.js';
 import Relawan from '../models/RelawanModel.js'; // Importing the Relawan model if needed
 import Kriteria from '../models/KriteriaModel.js'; // Importing the Kriteria model if needed
 
+
+// Controller: Get penilaian by id_relawan
+export const getPenilaianByRelawanId = async (req, res) => {
+    try {
+      console.log("Fetching penilaian for relawan ID:", req.params.id_relawan);
+      const penilaian = await Penilaian.findAll({
+        where: { id_relawan: req.params.id_relawan },
+        include: [
+          {
+            model: Relawan,
+            attributes: ['nama_relawan']
+          },
+          {
+            model: Kriteria,
+            attributes: ['nama_kriteria']
+          }
+        ]
+      });
+
+      if (penilaian.length > 0) {
+        res.status(200).json(penilaian);
+      } else {
+        res.status(404).json({ message: 'Penilaian untuk relawan ini tidak ditemukan' });
+      }
+    } catch (error) {
+      console.error("Error fetching penilaian by relawan id:", error);
+      res.status(500).json({ message: "Error fetching penilaian", error });
+    }
+};
+  
 // Get all evaluations
 export const getPenilaian = async (req, res) => {
     try {
@@ -55,27 +85,40 @@ export const savePenilaian = async (req, res) => {
 
 // Update an evaluation
 export const updatePenilaian = async (req, res) => {
-    const penilaianId = req.params.id_penilaian;
-    const { id, id_kriteria, nilai } = req.body; // Use 'id' instead of 'id_relawan'
+    const { id_relawan } = req.params;
+    const { id_kriteria, nilai } = req.body;
 
     try {
-        const updateResult = await Penilaian.update(
-            { id_relawan: id, id_kriteria, nilai }, // Values to update
-            { where: { id_penilaian: penilaianId } } // Criteria to find the entry to update
-        );
+        const penilaian = await Penilaian.findOne({
+            where: {
+                id_relawan: id_relawan,
+                id_kriteria: id_kriteria
+            }
+        });
 
-        if (updateResult[0] === 0) {
-            return res.status(404).json({ message: 'Penilaian not found' });
+        if (!penilaian) {
+            return res.status(404).json({ message: "Penilaian not found" });
         }
 
-        const updatedPenilaian = await Penilaian.findOne({ where: { id_penilaian: penilaianId } });
-        res.status(200).json(updatedPenilaian);
+        console.log("Request body:", req.body);
+        console.log("Request params:", req.params);
+
+        penilaian.nilai = nilai;
+
+        const updatedPenilaian = await penilaian.save();
+        console.log("Updated penilaian:", updatedPenilaian);
+
+        return res.status(200).json({ message: "Penilaian updated successfully", penilaian: updatedPenilaian });
     } catch (error) {
-        res.status(400).json({
-            message: error.message // Correctly spelled 'message'
-        });
+        console.error("Error updating penilaian:", error);
+        return res.status(500).json({ message: "Error updating penilaian", error: error.message });
     }
 };
+
+
+
+  
+  
 
 // Delete an evaluation
 export const deletePenilaian = async (req, res) => {

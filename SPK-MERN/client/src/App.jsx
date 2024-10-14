@@ -9,6 +9,8 @@ import EditKriteria from "./components/fragment/Kriteria/EditKriteria";
 import Penilaian from './components/pages/Penilaian';
 import AddPenilaian from './components/fragment/Penilaian/AddPenilaian'
 import EditPenilaian from "./components/fragment/Penilaian/EditPenilaian";
+import HasilHitung from './components/pages/Perhitungan'
+import RangkingPage from "./components/pages/RangkingPage";
 
 
 function App() {
@@ -25,7 +27,10 @@ function App() {
           <Route path="/kriteria/edit/:id_kriteria" element={<EditKriteria/>} />
           <Route path="/penilaian" element={<Penilaian/>}/>
           <Route path="/penilaian/:id" element={<AddPenilaian/>}/>
-          <Route path="/editPenilaian/:id" element={<EditPenilaian/>}/>
+          {/* <Route path="/penilaian/:id_kriteria" element={<EditPenilaian/>}/> */}
+          <Route path="/perhitungan" element={<HasilHitung/>}/>
+          <Route path="/rangking" element={<RangkingPage/>}/>
+
           
         </Routes>
       </div>
