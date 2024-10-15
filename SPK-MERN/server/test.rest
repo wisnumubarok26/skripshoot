@@ -1,9 +1,9 @@
-GET http://localhost:5000/penilaian/relawan/13
-Content-Type: application/json
+GET http://localhost:5000/relawan/28
+# Content-Type: application/json
 
-{
-    "id":22,
-    "id_kriteria":6,
-    "nilai":4
-}
+# {
+#     "id":22,
+#     "id_kriteria":6,
+#     "nilai":4
+# }
  

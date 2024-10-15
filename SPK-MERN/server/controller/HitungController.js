@@ -123,3 +123,24 @@ export const resetHasilTOPSIS = async (req, res) => {
         res.status(500).json({ message: 'Error resetting TOPSIS results' });
     }
 };
+
+export const getSkorTOPSIS = async (req, res) => {
+    try {
+        const hasilPerhitungan = await HasilPerhitungan.findAll({
+            attributes: ['id_relawan', 'nama_relawan', 'skor'],
+            order: [['skor', 'DESC']],
+        });
+
+        if (hasilPerhitungan.length === 0) {
+            console.log('Belum ada hasil perhitungan');
+            return res.status(404).json({ message: 'Belum ada hasil TOPSIS yang dihitung.' });
+        }
+
+        console.log('Hasil perhitungan ditemukan:', hasilPerhitungan);
+        res.status(200).json(hasilPerhitungan);
+    } catch (error) {
+        console.error('Error fetching TOPSIS scores:', error);
+        res.status(500).json({ message: 'Error fetching TOPSIS scores' });
+    }
+};
+

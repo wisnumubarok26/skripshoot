@@ -10,7 +10,7 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
 
 const Penilaian = sequelize.define('penilaians', {
     nilai: {
-        type: DataTypes.DECIMAL(5, 2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
     id_relawan: {

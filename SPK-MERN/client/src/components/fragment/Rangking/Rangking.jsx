@@ -6,21 +6,54 @@ const Rangking = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Fetch relawans when component mounts
-        const fetchRelawans = async () => {
+        const fetchRelawansWithScores = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/relawan'); // Ganti dengan endpoint yang sesuai
-                const relawansWithSkor = response.data.map(relawan => ({
-                    ...relawan,
-                    skor: 0,
-                }));
-                setRelawans(relawansWithSkor);
+                const responseRelawans = await axios.get('http://localhost:5000/relawan');
+                const responseScores = await axios.get('http://localhost:5000/skor');
+        
+                const scoresArray = Array.isArray(responseScores.data) ? responseScores.data : responseScores.data.scores;
+        
+                if (Array.isArray(scoresArray)) {
+                    const relawansWithScores = responseRelawans.data.map((relawan) => {
+                        const skor = scoresArray.find((score) => score.id_relawan === relawan.id)?.skor || 0;
+                        return { ...relawan, skor: parseFloat(skor) }; // Konversi skor ke number
+                    });
+                    setRelawans(relawansWithScores);
+                } else {
+                    console.error('Scores data is not an array:', responseScores.data);
+                }
             } catch (error) {
-                console.error('Error fetching relawans:', error);
+                console.error('Error fetching relawans and scores:', error);
             }
         };
-        fetchRelawans();
+        
+        const handleHitungTOPSIS = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.post('http://localhost:5000/hitung-topsis');
+                const hasilAkhir = response.data;
+        
+                // Perbarui skor relawan berdasarkan hasil perhitungan
+                const updatedRelawans = relawans.map(relawan => {
+                    const hasil = hasilAkhir.find(item => item.id_relawan === relawan.id);
+                    return {
+                        ...relawan,
+                        skor: hasil ? parseFloat(hasil.skor) : 0, // Pastikan skor dalam bentuk number
+                    };
+                });
+        
+                setRelawans(updatedRelawans);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error calculating TOPSIS:', error);
+                setLoading(false);
+            }
+        };        
+    
+        fetchRelawansWithScores();
     }, []);
+    
+    
 
     const handleHitungTOPSIS = async () => {
         setLoading(true);

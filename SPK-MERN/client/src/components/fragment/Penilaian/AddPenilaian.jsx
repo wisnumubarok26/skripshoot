@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const FormPenilaian = () => {
   const { id } = useParams(); // Ambil ID relawan dari URL
+  const navigate = useNavigate(); // Digunakan untuk navigasi setelah simpan berhasil
   const [kriteria, setKriteria] = useState([]);
   const [penilaian, setPenilaian] = useState({});
+  const [existingPenilaian, setExistingPenilaian] = useState({});
 
   useEffect(() => {
     fetchKriteria();
+    fetchPenilaian();
   }, []);
 
   const fetchKriteria = async () => {
@@ -20,6 +23,20 @@ const FormPenilaian = () => {
     }
   };
 
+  const fetchPenilaian = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/penilaian/relawan/${id}`);
+      const penilaianData = response.data.reduce((acc, item) => {
+        acc[item.id_kriteria] = item.nilai;
+        return acc;
+      }, {});
+      setExistingPenilaian(penilaianData);
+      setPenilaian(penilaianData);
+    } catch (error) {
+      console.error("Error fetching penilaian:", error);
+    }
+  };
+
   const handleChange = (e, id_kriteria) => {
     setPenilaian({
       ...penilaian,
@@ -27,25 +44,9 @@ const FormPenilaian = () => {
     });
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       // Kirim nilai penilaian untuk setiap kriteria
-//       for (const id_kriteria in penilaian) {
-//         await axios.post("http://localhost:5000/penilaian", {
-//           id_relawan: id,
-//           id_kriteria: id_kriteria,
-//           nilai: penilaian[id_kriteria],
-//         });
-//       }
-//       alert("Penilaian berhasil disimpan!");
-//     } catch (error) {
-//       console.error("Error submitting penilaian:", error);
-//     }
-//   };
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       // Gunakan Promise.all untuk mengirim semua request sekaligus
       const promises = Object.keys(penilaian).map(async (id_kriteria) => {
@@ -54,22 +55,23 @@ const handleSubmit = async (e) => {
           id_kriteria: id_kriteria,  // ID kriteria yang dinamis
           nilai: penilaian[id_kriteria]  // Nilai yang diinput user
         };
-  
-        console.log("Data yang dikirim: ", dataToSend);  // Debugging log
-  
+
         return axios.post("http://localhost:5000/penilaian", dataToSend);
       });
-  
+
       // Menunggu semua request selesai
       await Promise.all(promises);
       
+      // Tampilkan custom pop-up setelah data disimpan
       alert("Penilaian berhasil disimpan!");
-  
+
+      // Alihkan ke halaman penilaian setelah klik OK
+      navigate("/penilaian");
+
     } catch (error) {
       console.error("Error submitting penilaian:", error);
     }
   };
-  
 
   return (
     <div className="flex justify-center mt-10">
@@ -82,6 +84,7 @@ const handleSubmit = async (e) => {
               <input
                 type="number"
                 className="border p-2 w-full"
+                value={penilaian[item.id_kriteria] || ""}
                 onChange={(e) => handleChange(e, item.id_kriteria)}
                 required
               />
@@ -92,13 +95,7 @@ const handleSubmit = async (e) => {
             className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
           >
             Simpan Penilaian
-          </button>
-          <Link
-            to={`/editPenilaian/${id}`}
-            className="ml-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-          >
-            Edit Penilaian
-          </Link>
+          </button>          
         </form>
       </div>
     </div>

@@ -18,7 +18,7 @@ const Kriteria = sequelize.define('kriteria', {
     allowNull: false
   },
   bobot: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.DECIMAL(10,2),
     allowNull: false
   },
   tipe: {

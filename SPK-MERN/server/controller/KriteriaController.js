@@ -41,26 +41,35 @@ export const saveKriteria = async (req, res) => {
 
 export const updateKriteria = async (req, res) => {
     const kriteriaId = req.params.id_kriteria;
-    const { nama_kriteria, bobot, tipe } = req.body;
+    let { nama_kriteria, bobot, tipe } = req.body;
+
+    // Validasi dan konversi jika perlu
+    if (typeof bobot === 'string') {
+        bobot = bobot.replace(',', '.'); // Mengganti koma dengan titik jika ada
+    }
+
+    // Cek apakah nilai bobot valid
+    if (isNaN(bobot)) {
+        return res.status(400).json({ message: "Bobot must be a valid number" });
+    }
 
     try {
         const [updated] = await Kriteria.update(
             { nama_kriteria, bobot, tipe },
-            { where: { id_kriteria: kriteriaId } } // Gunakan id_kriteria untuk mencocokkan
+            { where: { id_kriteria: kriteriaId } }
         );
 
         if (!updated) {
-            return res.status(404).json({ message: "Kriteria not found" }); // Respons jika tidak ada yang diperbarui
+            return res.status(404).json({ message: "Kriteria not found" });
         }
 
         const updatedKriteria = await Kriteria.findByPk(kriteriaId);
         res.status(200).json(updatedKriteria);
     } catch (error) {
-        res.status(400).json({
-            message: error.message // Perbaikan typo
-        });
+        res.status(400).json({ message: error.message });
     }
 };
+
 
 export const deleteKriteria = async (req, res) => {
     const kriteriaId = req.params.id_kriteria;
