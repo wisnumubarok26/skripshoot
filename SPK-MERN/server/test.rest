@@ -1,4 +1,4 @@
-GET http://localhost:5000/relawan/28
+GET http://localhost:5000/skor
 # Content-Type: application/json
 
 # {

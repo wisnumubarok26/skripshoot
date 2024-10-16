@@ -61,7 +61,7 @@ export const hitungTOPSIS = async (req, res) => {
         let solusiIdealNegatif = {};
         kriteria.forEach((krit, idx) => {
             const nilaiKriteria = Object.values(matriksTerbobot).map(n => n[krit.id_kriteria]);
-            if (tipeKriteria[idx] === 'benefit') {
+            if (tipeKriteria[idx] === 'Benefit') {
                 solusiIdealPositif[krit.id_kriteria] = Math.max(...nilaiKriteria);
                 solusiIdealNegatif[krit.id_kriteria] = Math.min(...nilaiKriteria);
             } else {
@@ -133,7 +133,7 @@ export const getSkorTOPSIS = async (req, res) => {
 
         if (hasilPerhitungan.length === 0) {
             console.log('Belum ada hasil perhitungan');
-            return res.status(404).json({ message: 'Belum ada hasil TOPSIS yang dihitung.' });
+            return res.status(200).json([]);
         }
 
         console.log('Hasil perhitungan ditemukan:', hasilPerhitungan);
