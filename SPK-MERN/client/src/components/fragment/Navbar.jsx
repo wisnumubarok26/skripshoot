@@ -17,7 +17,8 @@ const Navbar = ({ setIsLoggedIn }) => {
 
     return (
         <div className="h-screen w-64 bg-green-600 text-white flex flex-col">
-            <h2 className="text-2xl font-bold p-4">SPK TOPSIS</h2>
+            <h2 className="text-2xl font-bold p-4 mt-4">Sistem pendukung keputusan TOPSIS</h2>
+            {/* <h3 className='mb-10 ml-4'>Taman Baca Msayarakat Kolong Ciputat</h3> */}
             <nav className="flex-grow">
                 <ul className="space-y-2 p-4">
                     <li>

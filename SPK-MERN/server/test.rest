@@ -1,9 +1,8 @@
-GET http://localhost:5000/skor
-# Content-Type: application/json
+POST http://localhost:5000/admin
+Content-Type: application/json
 
-# {
-#     "id":22,
-#     "id_kriteria":6,
-#     "nilai":4
-# }
+{
+    "username":"wisnumubarok1261",
+    "password":"wisnu2002"
+}
  

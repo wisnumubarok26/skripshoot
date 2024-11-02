@@ -5,6 +5,7 @@ import RelawanRoute from "./routes/RelawanRoute.js";
 import KriteriaRoute from "./routes/KriteriaRoute.js"
 import PenilaianRoute from "./routes/PenilaianRoute.js"
 import HitungRoute from "./routes/HitungRoute.js"
+import AdminRoute from "./routes/AdminRoute.js"
 // import HitungRoute from './routes/HitungRoute.js'
 import dotenv from 'dotenv';
 dotenv.config();
@@ -38,6 +39,7 @@ app.use(RelawanRoute);
 app.use(KriteriaRoute)
 app.use(PenilaianRoute)
 app.use(HitungRoute)
+app.use(AdminRoute)
 // app.use(HasilRoute)
 
 

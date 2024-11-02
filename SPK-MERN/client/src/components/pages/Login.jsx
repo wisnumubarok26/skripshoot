@@ -4,11 +4,13 @@ import Logo from "../element/Logo/Logo";
 
 const LoginPage = () => {
     return (
-        <div className="flex min-h-screen bg-bg ">
+        <div className="flex min-h-screen bg-bg p-10 ">
             {/* Sisi Kiri */}
             <div className="flex-1 flex justify-center items-center flex-col">
                 <Logo></Logo>
-                <p className="m-3 p-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius quo debitis inventore fugit aperiam atque delectus exercitationem, obcaecati quaerat beatae quos, dolor, odit accusamus sed veritatis odio reprehenderit et molestiae dolorum. Voluptas sit repudiandae error doloribus a quae amet quasi magnam nostrum soluta recusandae, eveniet provident nobis nihil odio quia!</p>
+                <p className="m-3 p-4">Taman Baca Masyarakat ( TBM ) Kolong Ciputat merupakan sebuah tempat yang dibuat secara inisiatif yang menjadi pusat untuk belajar dan bermain bagi anak-anak. Sebagai pusat kegiatan literasi, TBM Kolong Ciputat tidak hanya menyediakan bahan bacaan. Tetapi, juga menyelenggarakan berbagai program edukatif. 
+
+                </p>
             </div>
 
             {/* Sisi Kanan */}

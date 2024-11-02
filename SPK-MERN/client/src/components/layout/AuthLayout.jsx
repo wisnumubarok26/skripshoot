@@ -9,7 +9,7 @@ const AuthLayout = (props) =>{
             <h1 className='text-3xl font-bold text-textPrimary text-center mb-2'>{judulPage}</h1>
             <p className='font-medium text-textSecondary text-center'>Selamat Datang</p>
             {children}
-            <p className="text-sm my-5 text-center">
+            {/* <p className="text-sm my-5 text-center">
                 {type==='login' ? "Belum punya akun ? " : "Sudah punya akun? "} 
                 {type==='login' &&
                     <Link to="/register" className="text-bold text-textSecondary">Register</Link>
@@ -18,7 +18,7 @@ const AuthLayout = (props) =>{
                 {type==='register' &&
                     <Link to="/login" className="text-bold text-textSecondary">Login</Link>
                 }
-            </p>
+            </p> */}
         </div>  
     )
 }

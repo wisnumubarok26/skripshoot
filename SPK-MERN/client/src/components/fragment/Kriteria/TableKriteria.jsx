@@ -75,7 +75,7 @@ const KriteriaList = () => {
                       <div className="flex items-center space-x-2">
                         <Link
                           to={`edit/${kriteria.id_kriteria}`}
-                          className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs"
+                          className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded text-xs"
                         >
                           Edit
                         </Link>

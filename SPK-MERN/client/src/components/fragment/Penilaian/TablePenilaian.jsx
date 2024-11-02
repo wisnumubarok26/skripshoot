@@ -179,7 +179,7 @@ const TablePenilaian = () => {
                       )}
                       <Link
                         to={`/penilaian/${volunteer.id}`}
-                        className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs ml-2"
+                        className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded text-xs ml-2"
                       >
                         Isi Nilai
                       </Link>
